@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HookHive — Hooks, Ideas & Collab Calculator</title>
+  <style>
+    /* ===== Reset & Base ===== */
+    * {margin:0; padding:0; box-sizing:border-box;}
+    body {font-family:Arial, sans-serif; line-height:1.6; background:#f9f9f9; color:#333;}
+    a {color:#0066ff; text-decoration:none;}
+    h1,h2,h3 {margin-bottom:0.5em;}
+    section {padding:60px 20px;}
+    .container {max-width:1100px; margin:0 auto;}
+    
+    /* ===== Header ===== */
+    .site-header {background:#fff; border-bottom:1px solid #eee; position:sticky; top:0; z-index:1000;}
+    .header-inner {display:flex; align-items:center; justify-content:space-between; padding:15px 20px;}
+    .logo {font-weight:bold; font-size:20px; display:flex; align-items:center; gap:5px;}
+    .nav-menu {list-style:none; display:flex; gap:20px;}
+    .nav-toggle {display:none;}
+    .btn {display:inline-block; padding:10px 20px; border-radius:6px; font-weight:bold; cursor:pointer;}
+    .btn-primary {background:#0066ff; color:#fff;}
+    .btn-outline {border:2px solid #0066ff; color:#0066ff; background:none;}
+    .btn-ghost {border:1px solid #ddd; background:#fff;}
+    
+    /* ===== Hero ===== */
+    .hero {background:#eef4ff; text-align:center;}
+    .hero h1 {font-size:2.5em;}
+    .hero .subtitle {margin:15px 0; font-size:1.2em; color:#555;}
+    .hero-actions {margin-top:20px; display:flex; gap:10px; justify-content:center;}
+    
+    /* ===== Cards, Forms ===== */
+    .card {background:#fff; padding:20px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); margin:15px 0;}
+    .form-row {margin-bottom:15px;}
+    label {display:block; margin-bottom:5px; font-weight:bold;}
+    input, select {width:100%; padding:10px; border:1px solid #ccc; border-radius:6px;}
+    .form-actions {margin-top:10px;}
+
+    /* ===== Grid ===== */
+    .grid {display:grid; gap:20px;}
+    .features-grid, .pricing-grid, .testimonials-grid {grid-template-columns:repeat(auto-fit,minmax(250px,1fr));}
+
+    /* ===== Tabs ===== */
+    .tabs {display:flex; gap:10px; margin-bottom:20px;}
+    .tabs button {padding:10px 20px; border:1px solid #ccc; background:#fff; cursor:pointer; border-radius:6px;}
+    .tabs button[aria-selected="true"] {background:#0066ff; color:#fff;}
+    .tab-panels > div {display:none;}
+    .tab-panels > div[active] {display:block;}
+
+    /* ===== Pricing ===== */
+    .price {text-align:center;}
+    .price-amount {font-size:2em; margin:10px 0;}
+    .featured {border:2px solid #0066ff;}
+
+    /* ===== Footer ===== */
+    .site-footer {background:#222; color:#aaa; padding:40px 20px;}
+    .footer-inner {display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:20px;}
+    .footer-col h3 {color:#fff; margin-bottom:10px;}
+    .footer-bottom {text-align:center; margin-top:20px; font-size:0.9em;}
+    .socials {list-style:none; display:flex; gap:10px;}
+  </style>
+</head>
+<body>
+  <!-- ===== Header ===== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="/">🐝 HookHive</a>
+      <nav>
+        <button class="nav-toggle">☰</button>
+        <ul class="nav-menu">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#platforms">Platforms</a></li>
+          <li><a href="#collab">Collab Calculator</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero">
+    <div class="container">
+      <h1>Create scroll-stopping hooks in seconds</h1>
+      <p class="subtitle">AI-powered ideas and collaboration value calculator for Instagram, YouTube & Facebook.</p>
+      <div class="hero-actions">
+        <a href="#generator" class="btn btn-primary">Try Hook Generator</a>
+        <a href="#collab" class="btn btn-ghost">Estimate Collab Value</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Hook Generator ===== -->
+  <section id="generator">
+    <div class="container">
+      <h2>Hook Generator</h2>
+      <form class="card" id="hookForm">
+        <div class="form-row">
+          <label for="niche">Niche/Topic</label>
+          <input id="niche" type="text" placeholder="e.g., fitness for busy professionals" />
+        </div>
+        <div class="form-row">
+          <label for="tone">Tone</label>
+          <select id="tone">
+            <option>Bold</option>
+            <option>Curious</option>
+            <option>Educational</option>
+          </select>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-primary" id="generate-hooks">Generate Hooks</button>
+        </div>
+      </form>
+      <div class="grid" id="hookResults"></div>
+    </div>
+  </section>
+
+  <!-- ===== Features ===== -->
+  <section id="features">
+    <div class="container">
+      <h2>Features</h2>
+      <div class="grid features-grid">
+        <div class="card">Smart Hook Templates</div>
+        <div class="card">Idea Finder</div>
+        <div class="card">Collab Value Estimator</div>
+        <div class="card">Platform-Aware</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Platforms ===== -->
+  <section id="platforms">
+    <div class="container">
+      <h2>Built for your platform</h2>
+      <div class="tabs">
+        <button role="tab" aria-selected="true" data-tab="ig">Instagram</button>
+        <button role="tab" aria-selected="false" data-tab="yt">YouTube</button>
+        <button role="tab" aria-selected="false" data-tab="fb">Facebook</button>
+      </div>
+      <div class="tab-panels">
+        <div id="ig" active><p>Instagram best practices.</p></div>
+        <div id="yt"><p>YouTube best practices.</p></div>
+        <div id="fb"><p>Facebook best practices.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Collab Calculator ===== -->
+  <section id="collab">
+    <div class="container">
+      <h2>Collab Value Estimator</h2>
+      <form class="card" id="collabForm">
+        <div class="form-row"><label>Avg Views</label><input id="views" type="number"></div>
+        <div class="form-row"><label>CTR (%)</label><input id="ctr" type="number"></div>
+        <div class="form-row"><label>Conversion (%)</label><input id="conv" type="number"></div>
+        <div class="form-row"><label>AOV (₹)</label><input id="aov" type="number"></div>
+        <div class="form-row"><label>Audience Fit</label>
+          <select id="fit">
+            <option value="1">Low</option>
+            <option value="1.2">Medium</option>
+            <option value="1.4">High</option>
+          </select>
+        </div>
+        <button type="button" class="btn btn-primary" id="estimate">Estimate</button>
+      </form>
+      <div class="card" id="collabResult">Estimated Range: —</div>
+    </div>
+  </section>
+
+  <!-- ===== Pricing ===== -->
+  <section id="pricing">
+    <div class="container">
+      <h2>Pricing</h2>
+      <div class="grid pricing-grid">
+        <div class="card price"><h3>Free</h3><p class="price-amount">₹0</p></div>
+        <div class="card price featured"><h3>Creator</h3><p class="price-amount">₹399/mo</p></div>
+        <div class="card price"><h3>Team</h3><p class="price-amount">₹1299/mo</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section id="faq">
+    <div class="container">
+      <h2>FAQ</h2>
+      <div class="card"><strong>How is collab calculated?</strong><p>We use views × CTR × conversion × AOV × fit.</p></div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-col"><h3>Product</h3><ul><li><a href="#features">Features</a></li></ul></div>
+      <div class="footer-col"><h3>Company</h3><ul><li><a href="#">About</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">© <span id="year"></span> HookHive</div>
+  </footer>
+
+  <script>
+    // Dynamic Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Hook Generator (demo)
+    document.getElementById('generate-hooks').addEventListener('click', () => {
+      const niche = document.getElementById('niche').value;
+      const tone = document.getElementById('tone').value;
+      const results = document.getElementById('hookResults');
+      results.innerHTML = '';
+      const samples = [
+        `Why most ${niche} fail — and how to win.`,
+        `The ${tone} truth about ${niche}.`,
+        `3 hacks to master ${niche} fast.`
+      ];
+      samples.forEach(txt => {
+        const div = document.createElement('div');
+        div.className = 'card';
+        div.textContent = txt;
+        results.appendChild(div);
+      });
+    });
+
+    // Collab Calculator
+    document.getElementById('estimate').addEventListener('click', () => {
+      const views = +document.getElementById('views').value;
+      const ctr = +document.getElementById('ctr').value / 100;
+      const conv = +document.getElementById('conv').value / 100;
+      const aov = +document.getElementById('aov').value;
+      const fit = +document.getElementById('fit').value;
+      if(!views || !ctr || !conv || !aov) return;
+      const clicks = views * ctr;
+      const sales = clicks * conv;
+      const revenue = sales * aov * fit;
+      const low = Math.round(revenue*0.7);
+      const high = Math.round(revenue*1.1);
+      document.getElementById('collabResult').textContent = `Estimated Range: ₹${low} – ₹${high}`;
+    });
+
+    // Tabs
+    document.querySelectorAll('.tabs button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tabs button').forEach(b => b.setAttribute('aria-selected','false'));
+        btn.setAttribute('aria-selected','true');
+        document.querySelectorAll('.tab-panels > div').forEach(panel => panel.removeAttribute('active'));
+        document.getElementById(btn.dataset.tab).setAttribute('active','');
+      });
+    });
+  </script>
+</body>
+</html>
